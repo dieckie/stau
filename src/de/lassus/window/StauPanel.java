@@ -29,7 +29,7 @@ public class StauPanel extends JPanel {
             int y = (int) ((getHeight() / Engine.ROWS) * Math.floor((c.getX() - c.getLength()) / engine.getRowWidth()) + getHeight() / Engine.ROWS / 2);
             int w = (int) (c.getLength() * Engine.SCALE);
             int h = (int) (c.getWidth() * Engine.SCALE);
-            g.fillRect(x, y, w, h);
+            g.fillRect(x, y , w, h);
             g.setColor(Color.BLACK);
             g.drawString(c.getId() + "", (int) (x + ( w - g.getFontMetrics().stringWidth(c.getId() + "")) * 0.5), (int) (y + h * (2.5 / 3.0)));
         }

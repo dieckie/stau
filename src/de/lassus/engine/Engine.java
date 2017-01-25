@@ -10,8 +10,8 @@ import de.lassus.window.StauPanel;
 public class Engine {
 
 	public final static double SCALE = 8;
-	public final static double ROWS = 5;
-	static Engine engine;
+	public final static double ROWS = 10;
+	public static Engine engine;
 
 	List<Car> cars;
 	StauPanel stau;
@@ -37,7 +37,7 @@ public class Engine {
 					if (Math.random() > 0.95 && getLastCarDist() > 0) {
 						Color color = Color.getHSBColor((car * 3 % 360) / 360f, 1, 1);
 						//Color color = Color.DARK_GRAY;
-						cars.add(new Car(color, car++));
+						cars.add(new Car(color, car++, AIType.ComplexDrive));
 					}
 					ListIterator<Car> lit = cars.listIterator();
 					while (lit.hasNext()) {
