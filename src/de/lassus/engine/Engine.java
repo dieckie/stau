@@ -37,7 +37,7 @@ public class Engine {
 					if (Math.random() > 0.95 && getLastCarDist() > 0) {
 						Color color = Color.getHSBColor((car * 3 % 360) / 360f, 1, 1);
 						//Color color = Color.DARK_GRAY;
-						cars.add(new Car(color, car++, AIType.ComplexDrive));
+						cars.add(new Car(color, car++, AIType.SimpleDrive));
 					}
 					ListIterator<Car> lit = cars.listIterator();
 					while (lit.hasNext()) {
