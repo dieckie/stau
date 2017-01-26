@@ -36,8 +36,7 @@ public class Engine {
 					i++;
 					if (Math.random() > 0.95 && getLastCarDist() > 0) {
 						Color color = Color.getHSBColor((car * 3 % 360) / 360f, 1, 1);
-						//Color color = Color.DARK_GRAY;
-						cars.add(new Car(color, car++, AIType.SimpleDrive));
+						cars.add(new Car(color, car++, AIType.ComplexDrive));
 					}
 					ListIterator<Car> lit = cars.listIterator();
 					while (lit.hasNext()) {
@@ -87,12 +86,11 @@ public class Engine {
 		}
 		return nearestCars;
 	}
-	
 
 	public double getLastCarDist() {
 		double minDist = Double.MAX_VALUE;
 		for (Car c : cars) {
-			if(c.getX() < minDist) {
+			if (c.getX() < minDist) {
 				minDist = c.getX();
 			}
 		}

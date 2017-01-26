@@ -18,7 +18,7 @@ public class Car {
 	final static double MAX_VELOCITY = 1;
 	final static double MIN_VELOCITY = -0.1;
 
-	final static double MAX_ACCEL = 0.01;
+	final static double MAX_ACCEL = 0.003;
 	final static double MIN_ACCEL = -0.01;
 
 	// KIKONTROLLE
