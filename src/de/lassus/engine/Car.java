@@ -41,6 +41,9 @@ public class Car {
 		case SimpleDrive:
 			ai = new SimpleDrive();
 			break;
+		case BetterDrive:
+			ai = new BetterDrive();
+			break;
 		default:
 			break;
 
