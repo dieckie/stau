@@ -90,6 +90,10 @@ public class Car {
 	public int getId() {
 		return id;
 	}
+	
+	public void setColor(Color col) {
+		c = col;
+	}
 
 	@Override
 	public String toString() {
