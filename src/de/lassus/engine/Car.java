@@ -15,8 +15,10 @@ public class Car {
 	public final static double LENGTH = 4;
 
 	// AUTOKONTROLLE
-	final static double MAX_VELOCITY = 1;
+	final static double MAX_VELOCITY = 2;
 	final static double MIN_VELOCITY = -0.1;
+	
+	double maxVel = 1;
 
 	final static double MAX_ACCEL = 0.003;
 	final static double MIN_ACCEL = -0.01;
@@ -57,7 +59,7 @@ public class Car {
 		acceleration = Math.min(MAX_ACCEL, acceleration);
 		acceleration = Math.max(MIN_ACCEL, acceleration);
 		velocity += acceleration;
-		velocity = Math.min(MAX_VELOCITY, velocity);
+		velocity = Math.min(maxVel, velocity);
 		velocity = Math.max(MIN_VELOCITY, velocity);
 		x += velocity;
 	}
@@ -93,6 +95,10 @@ public class Car {
 	
 	public void setColor(Color col) {
 		c = col;
+	}
+	
+	public void setMaxVel(double maxvel) {
+		maxVel = maxvel;
 	}
 
 	@Override
