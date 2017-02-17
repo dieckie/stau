@@ -15,7 +15,7 @@ public class Car {
 	public final static double LENGTH = 4;
 
 	// AUTOKONTROLLE
-	final static double MAX_VELOCITY = 2;
+	final static double MAX_VELOCITY = 1.25;
 	final static double MIN_VELOCITY = -0.1;
 	
 	double maxVel = 1;
@@ -32,7 +32,7 @@ public class Car {
 
 	public Car(Color c, int id, AIType aiType) {
 		this.c = c;
-		velocity = 0.6;
+		velocity = 1;
 		x = -LENGTH;
 		this.id = id;
 
@@ -59,6 +59,7 @@ public class Car {
 		acceleration = Math.min(MAX_ACCEL, acceleration);
 		acceleration = Math.max(MIN_ACCEL, acceleration);
 		velocity += acceleration;
+		maxVel = Math.min(MAX_VELOCITY, maxVel);
 		velocity = Math.min(maxVel, velocity);
 		velocity = Math.max(MIN_VELOCITY, velocity);
 		x += velocity;
