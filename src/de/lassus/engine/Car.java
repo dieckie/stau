@@ -15,10 +15,8 @@ public class Car {
 	public final static double LENGTH = 4;
 
 	// AUTOKONTROLLE
-	final static double MAX_VELOCITY = 1.25;
-	final static double MIN_VELOCITY = -0.1;
-	
-	double maxVel = 1;
+	final static double MAX_VELOCITY = 2;
+	final static double MIN_VELOCITY = -0.5;
 
 	final static double MAX_ACCEL = 0.003;
 	final static double MIN_ACCEL = -0.01;
@@ -29,6 +27,11 @@ public class Car {
 	private double x;
 	private double velocity;
 	private double acceleration = 0;
+	
+	double maxVel = 1;
+	double minVel = 0;
+	double maxAccel = 0;
+	double minAccel = 0;
 
 	public Car(Color c, int id, AIType aiType) {
 		this.c = c;
@@ -45,6 +48,9 @@ public class Car {
 			break;
 		case BetterDrive:
 			ai = new BetterDrive();
+			break;
+		case IntelligentDrive:
+			ai = new IntelligentDrive();
 			break;
 		default:
 			break;
@@ -64,7 +70,6 @@ public class Car {
 		velocity = Math.max(MIN_VELOCITY, velocity);
 		x += velocity;
 	}
-
 	
 	public Color getColor() {
 		return c;
@@ -100,6 +105,18 @@ public class Car {
 	
 	public void setMaxVel(double maxvel) {
 		maxVel = maxvel;
+	}
+	
+	public void setMinVel(double minvel) {
+		minVel = minvel;
+	}
+	
+	public void setMaxAccel(double maxaccel) {
+		maxAccel = maxaccel;
+	}
+	
+	public void setMinAccel(double minaccel) {
+		minAccel = minaccel;
 	}
 
 	@Override

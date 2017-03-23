@@ -34,7 +34,8 @@ public class Engine {
 				int car = 0;
 				while (true) {
 					i++;
-					if (Math.random() > 0.955 && getLastCarDist() > 0) {
+					//if (Math.random() > 0.955 && getLastCarDist() > 0) {
+					if (getLastCarDist() > 20) {
 						Color color = Color.getHSBColor((car * 3 % 360) / 360f, 1, 1);
 						cars.add(new Car(color, car++, AIType.BetterDrive));
 					}

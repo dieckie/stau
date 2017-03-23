@@ -17,6 +17,7 @@ public class BetterDrive implements AI{
 	boolean breaking = false;
 	double brMaxVal = 0;
 	double brActLength = 0;
+	boolean near = false;
 	
 	//maxGesch anpassen
 	double MaxVel = 1;
@@ -46,9 +47,24 @@ public class BetterDrive implements AI{
 			MaxVel = 0.075*dXcars+1;
 			car.setMaxVel(MaxVel);
 			
+			//bremsen bei kleinem Abstand
+			if(dXcars < maxRangeToNext && car.getVelocity() >= 0) {
+				car.setColor(Color.white);
+				double destX = simMovement(nearestCars[1].getX(), nearestCars[1].getVelocity(), nearestCars[1].getAcceleration(), 1);
+				acceleration = (calcAcceleration(car.getX(), destX - maxRangeToNext, car.getVelocity(), 1))+0.1;
+				//acceleration = 0;
+				//acceleration -= maxRangeToNext - dXcars;
+				near = true;
+			} else {
+				if(breaking) {
+					car.setColor(col);
+				}
+				near = false;
+			}
+			
 			//bremsen mit einer bestimmten Wahrscheinlichkeit mit einer zufälligen Starke pro tick zufällig lange bremsen bis die Zeit um ist oder das Auto steht
 			//zufälliges bremsen initialisieren
-			int rndBrChance = rnd.nextInt(1000);
+			int rndBrChance = rnd.nextInt(10000);
 			if(rndBrChance == 0 && !breaking) {
 				double rndBrLength = (rnd.nextDouble()*30)+5;
 				double rndBrMaxVal = rnd.nextDouble();
@@ -64,7 +80,9 @@ public class BetterDrive implements AI{
 			}
 			//bremsen beenden
 			if(car.getVelocity() <= 0 || brActLength <= 0) {
+				if(!near) {
 				car.setColor(col);
+				}
 				breaking = false;
 			}
 			
