@@ -27,6 +27,7 @@ public class Car {
 	private double x;
 	private double velocity;
 	private double acceleration = 0;
+	private int lane = 0;
 	
 	double maxVel = 1;
 	double minVel = 0;
@@ -73,6 +74,10 @@ public class Car {
 	
 	public Color getColor() {
 		return c;
+	}
+	
+	public int getLane() {
+		return lane;
 	}
 
 	public double getX() {

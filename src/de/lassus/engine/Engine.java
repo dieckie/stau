@@ -11,6 +11,8 @@ public class Engine {
 
 	public final static double SCALE = 8;
 	public final static double ROWS = 10;
+	public final static double LANES = 2;
+	
 	public static Engine engine;
 
 	List<Car> cars;
