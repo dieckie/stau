@@ -10,8 +10,8 @@ import de.lassus.window.StauPanel;
 public class Engine {
 
 	public final static double SCALE = 8;
-	public final static double ROWS = 10;
-	public final static double LANES = 2;
+	public final static int ROWS = 10;
+	public final static int LANES = 2;
 	
 	public static Engine engine;
 
@@ -36,8 +36,9 @@ public class Engine {
 				int car = 0;
 				while (true) {
 					i++;
-					//if (Math.random() > 0.955 && getLastCarDist() > 0) {
-					if (getLastCarDist() > 20) {
+					
+					if (Math.random() > 0.955 && getLastCarDist() > 0) {
+					//if (getLastCarDist() > 20) {
 						Color color = Color.getHSBColor((car * 3 % 360) / 360f, 1, 1);
 						cars.add(new Car(color, car++, AIType.BetterDrive));
 					}
