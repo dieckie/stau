@@ -15,11 +15,11 @@ public class Car {
 	public final static double LENGTH = 4;
 
 	// AUTOKONTROLLE
-	final static double MAX_VELOCITY = 2;
-	final static double MIN_VELOCITY = -0.5;
+	public final static double MAX_VELOCITY = 2;
+	public final static double MIN_VELOCITY = -0.5;
 
-	final static double MAX_ACCEL = 0.003;
-	final static double MIN_ACCEL = -0.01;
+	public final static double MAX_ACCEL = 0.003;
+	public final static double MIN_ACCEL = -0.005;
 
 	// KIKONTROLLE
 	private AI ai;
@@ -53,6 +53,9 @@ public class Car {
 		case IntelligentDrive:
 			ai = new IntelligentDrive();
 			break;
+		case HumanDrive:
+		    ai = new HumanDrive();
+		    break;
 		default:
 			break;
 
@@ -67,7 +70,7 @@ public class Car {
 		acceleration = Math.max(MIN_ACCEL, acceleration);
 		velocity += acceleration;
 		maxVel = Math.min(MAX_VELOCITY, maxVel);
-		velocity = Math.min(maxVel, velocity);
+		velocity = Math.min(MAX_VELOCITY, velocity);
 		velocity = Math.max(MIN_VELOCITY, velocity);
 		x += velocity;
 	}
@@ -82,6 +85,10 @@ public class Car {
 
 	public double getX() {
 		return x;
+	}
+	
+	public void setX(double x) {
+	    this.x = x;
 	}
 
 	public double getVelocity() {

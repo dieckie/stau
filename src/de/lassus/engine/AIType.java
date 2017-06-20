@@ -5,5 +5,6 @@ public enum AIType {
 	SimpleDrive,
 	ComplexDrive,
 	BetterDrive,
-	IntelligentDrive
+	IntelligentDrive,
+	HumanDrive
 }

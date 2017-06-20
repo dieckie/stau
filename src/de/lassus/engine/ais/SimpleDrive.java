@@ -13,7 +13,7 @@ public class SimpleDrive implements AI {
 
 	@Override
 	public double act() {
-		return 0;
+		return 0.1;
 	}
 
 }
