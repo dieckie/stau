@@ -72,7 +72,7 @@ public class Car {
 		maxVel = Math.min(MAX_VELOCITY, maxVel);
 		velocity = Math.min(MAX_VELOCITY, velocity);
 		velocity = Math.max(MIN_VELOCITY, velocity);
-		x += velocity;
+		x += velocity * Engine.SIMULATION_SPEED;
 	}
 	
 	public Color getColor() {

@@ -15,7 +15,8 @@ public class Engine {
     public final static int LANES = 1;
     public final static double TRACKLENGTH = 80;
     public final static double TOTAL_LENGTH = TRACKLENGTH * ROWS + 2 * Car.LENGTH; 
-    public final static int CARS = 300;
+    public final static int CARS = 150;
+    public final static double SIMULATION_SPEED = 1;
 
     public static Engine engine;
 

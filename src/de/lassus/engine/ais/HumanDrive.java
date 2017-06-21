@@ -10,6 +10,10 @@ public class HumanDrive implements AI {
 
     final int REACTION_TIME = 5;
     final double MAX_DEVIATION = 0.3;
+    
+    
+    double[] reactions = new double[REACTION_TIME];
+    int current = 0;
 
     @Override
     public void init(Car c) {
@@ -36,24 +40,29 @@ public class HumanDrive implements AI {
             if(car.getId() == 58) {
                 System.out.println(front.getId() + ", "  + stopMeDistance + ", " + distance + ", " + car.getX() + ", " + Engine.TOTAL_LENGTH);
             }
-            if(distance + stopNextDistance < stopMeDistance + Car.LENGTH * 1) {
+            if(distance + stopNextDistance < stopMeDistance + Car.LENGTH * 2) {
                 destVel = 0;
-                //return destVel - car.getVelocity();
             }
         }
         if(Math.random() < 0.5) {
-            deviation += (Math.random() * 0.8 - 0.4);
+            deviation += (Math.random() * 0.2 - 0.1);
             if(deviation > MAX_DEVIATION) {
                 deviation = MAX_DEVIATION;
             } else if(deviation < -MAX_DEVIATION) {
                 deviation = -MAX_DEVIATION;
             }
         }
-        destVel += deviation;
+        destVel += destVel * deviation;
         if(destVel < 0) {
             destVel = 0;
         }
-        return destVel - car.getVelocity();
+        
+        double nowVel = reactions[current];
+        reactions[current] = destVel - car.getVelocity();
+        current++;
+        current %= REACTION_TIME;
+        
+        return nowVel;
     }
 
 }
