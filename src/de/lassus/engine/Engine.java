@@ -2,8 +2,13 @@ package de.lassus.engine;
 
 import java.awt.Color;
 import java.awt.KeyboardFocusManager;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 
 import de.lassus.window.StauPanel;
@@ -14,8 +19,8 @@ public class Engine {
     public final static int ROWS = 20;
     public final static int LANES = 1;
     public final static double TRACKLENGTH = 80;
-    public final static double TOTAL_LENGTH = TRACKLENGTH * ROWS + 2 * Car.LENGTH; 
-    public final static int CARS = 150;
+    public final static double TOTAL_LENGTH = TRACKLENGTH * ROWS + 2 * Car.LENGTH;
+    public final static int CARS = 120;
     public final static double SIMULATION_SPEED = 1;
 
     public static Engine engine;
@@ -39,11 +44,20 @@ public class Engine {
             c.setX(-4 + margin * i);
             cars.add(c);
         }
-        
+
         new Thread(new Runnable() {
 
+            @SuppressWarnings("resource")
             @Override
             public synchronized void run() {
+                FileWriter fw = null;
+                try {
+                    SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy-HH-mm-ss");
+                    fw = new FileWriter(new File(sdf.format(new Date()) + "data.csv"));
+                } catch(IOException e1) {
+                    e1.printStackTrace();
+                }
+
                 int i = 0;
                 int car = 0;
                 boolean addCars = true;
@@ -52,13 +66,22 @@ public class Engine {
 
                     if(addCars && getLastCarDist() > 70) {
                         // if (getLastCarDist() > 20) {
-                        //Color color = Color.getHSBColor((car * 3 % 360) / 360f, 1, 1);
-                        //cars.add(new Car(color, car++, AIType.HumanDrive));
+                        // Color color = Color.getHSBColor((car * 3 % 360) / 360f, 1, 1);
+                        // cars.add(new Car(color, car++, AIType.HumanDrive));
                     }
                     ListIterator<Car> lit = cars.listIterator();
                     while(lit.hasNext()) {
                         Car c = lit.next();
                         c.act();
+                        try {
+                            if(lit.hasNext()) {
+                                fw.write((c.getX() + ";").replace(".", ","));
+                            } else {
+                                fw.write((c.getX() + "\n").replace(".", ","));
+                            }
+                        } catch(IOException e) {
+                            e.printStackTrace();
+                        }
                         if(addCars && c.getX() > getWidth() - Engine.TRACKLENGTH) {
                             // Autospawn deaktivieren, bevor der Kreis geschlossen wird
                             addCars = false;

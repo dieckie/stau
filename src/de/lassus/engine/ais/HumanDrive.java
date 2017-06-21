@@ -61,7 +61,6 @@ public class HumanDrive implements AI {
         reactions[current] = destVel - car.getVelocity();
         current++;
         current %= REACTION_TIME;
-        
         return nowVel;
     }
 
