@@ -14,7 +14,8 @@ public class Engine {
     public final static int ROWS = 20;
     public final static int LANES = 1;
     public final static double TRACKLENGTH = 80;
-    public final static int CARS = 70;
+    public final static double TOTAL_LENGTH = TRACKLENGTH * ROWS + 2 * Car.LENGTH; 
+    public final static int CARS = 300;
 
     public static Engine engine;
 
@@ -30,11 +31,11 @@ public class Engine {
         frame.pack();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
-        double margin = TRACKLENGTH * ROWS / CARS;
+        double margin = Engine.TOTAL_LENGTH / (CARS);
         for(int i = 0; i < CARS; i++) {
             Color color = Color.getHSBColor((i * 3 % 360) / 360f, 1, 1);
             Car c = new Car(color, i, AIType.HumanDrive);
-            c.setX(margin * i);
+            c.setX(-4 + margin * i);
             cars.add(c);
         }
         
@@ -61,7 +62,7 @@ public class Engine {
                             // Autospawn deaktivieren, bevor der Kreis geschlossen wird
                             addCars = false;
                         }
-                        if(c.getX() > getWidth() + Car.LENGTH) {
+                        if(c.getX() > getWidth() - Car.LENGTH) {
                             c.setX(-Car.LENGTH);
                         }
                         stau.repaint();
@@ -90,11 +91,11 @@ public class Engine {
             if(c != car) {
                 double deltaBehindX = c.getX() - car.getX();
                 if(deltaBehindX > 0) {
-                    deltaBehindX -= Engine.TRACKLENGTH * ROWS;
+                    deltaBehindX -= getWidth();
                 }
                 double deltaInFrontX = c.getX() - car.getX();
                 if(deltaInFrontX < 0) {
-                    deltaInFrontX += Engine.TRACKLENGTH * ROWS;
+                    deltaInFrontX += getWidth();
                 }
                 if(deltaInFrontX < nextCarFront) {
                     nextCarFront = deltaInFrontX;
@@ -128,7 +129,7 @@ public class Engine {
     }
 
     public double getWidth() {
-        return getRowWidth() * ROWS;
+        return getRowWidth() * ROWS + 2 * Car.LENGTH;
     }
 
 }
