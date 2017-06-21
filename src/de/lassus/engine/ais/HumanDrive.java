@@ -34,15 +34,13 @@ public class HumanDrive implements AI {
             }
             double distance = frontX - car.getX();
             double stopNextDistance = -0.5 * front.getVelocity() * front.getVelocity() / Car.MIN_ACCEL;
-            double stopXNext = frontX - 0.5 * front.getVelocity() * front.getVelocity() / Car.MIN_ACCEL;
             double stopMeDistance = -0.5 * car.getVelocity() * car.getVelocity() / Car.MIN_ACCEL + car.getVelocity() * REACTION_TIME;
             if(distance + stopNextDistance < stopMeDistance + Car.LENGTH * 2) {
                 destVel = 0;
             }
         }
         if(isComputer) {
-            return 0;
-            //return destVel - car.getVelocity();
+            return destVel - car.getVelocity();
         } else {
             if(Math.random() < 0.5) {
                 deviation += (Math.random() * 0.2 - 0.1);

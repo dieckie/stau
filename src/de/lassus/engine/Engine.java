@@ -23,7 +23,7 @@ public class Engine {
     public final static int CARS = 120;
     public final static double SIMULATION_SPEED = 1;
 
-    public final static double COMPUTER_RATIO = 0.3;
+    public final static double COMPUTER_RATIO = 0.05;
 
     public final static double TOTAL_LENGTH = TRACKLENGTH * ROWS + 2 * Car.LENGTH;
 
@@ -44,10 +44,10 @@ public class Engine {
         double margin = Engine.TOTAL_LENGTH / (CARS);
 
         int computerCars = (int) (CARS * COMPUTER_RATIO);
-        double carsOnComputer = CARS / computerCars;
+        double carsOnComputer = computerCars == 0 ? 0 : CARS / computerCars; // Um division by zero - Error zu vermeiden, wenn keine Computerautos da sind
         int a = 0;
         for(int i = 0; i < CARS; i++) {
-            //Color color = Color.getHSBColor((i * 3 % 360) / 360f, 1, 1);
+            // Color color = Color.getHSBColor((i * 3 % 360) / 360f, 1, 1);
             Car c = new Car(Color.BLUE, i, AIType.HumanDrive);
             if(Math.round(a * carsOnComputer) == i) {
                 ((HumanDrive) c.getAi()).setComputer(true);
@@ -67,6 +67,11 @@ public class Engine {
                 try {
                     SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy-HH-mm-ss");
                     fw = new FileWriter(new File(sdf.format(new Date()) + "data.csv"));
+                } catch(IOException e1) {
+                    e1.printStackTrace();
+                }
+                try {
+                    fw.write("Anzahl Computercars: " + (int) (CARS * COMPUTER_RATIO) + "\n");
                 } catch(IOException e1) {
                     e1.printStackTrace();
                 }
