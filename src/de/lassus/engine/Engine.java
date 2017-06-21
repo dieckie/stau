@@ -19,9 +19,10 @@ public class Engine {
     public final static int ROWS = 20;
     public final static int LANES = 1;
     public final static double TRACKLENGTH = 80;
-    public final static double TOTAL_LENGTH = TRACKLENGTH * ROWS + 2 * Car.LENGTH;
     public final static int CARS = 120;
     public final static double SIMULATION_SPEED = 1;
+    
+    public final static double TOTAL_LENGTH = TRACKLENGTH * ROWS + 2 * Car.LENGTH;
 
     public static Engine engine;
 
@@ -57,18 +58,8 @@ public class Engine {
                 } catch(IOException e1) {
                     e1.printStackTrace();
                 }
-
-                int i = 0;
-                int car = 0;
-                boolean addCars = true;
                 while(true) {
-                    i++;
-
-                    if(addCars && getLastCarDist() > 70) {
-                        // if (getLastCarDist() > 20) {
-                        // Color color = Color.getHSBColor((car * 3 % 360) / 360f, 1, 1);
-                        // cars.add(new Car(color, car++, AIType.HumanDrive));
-                    }
+                    long time = System.currentTimeMillis();
                     ListIterator<Car> lit = cars.listIterator();
                     while(lit.hasNext()) {
                         Car c = lit.next();
@@ -82,17 +73,16 @@ public class Engine {
                         } catch(IOException e) {
                             e.printStackTrace();
                         }
-                        if(addCars && c.getX() > getWidth() - Engine.TRACKLENGTH) {
-                            // Autospawn deaktivieren, bevor der Kreis geschlossen wird
-                            addCars = false;
-                        }
                         if(c.getX() > getWidth() - Car.LENGTH) {
-                            c.setX(-Car.LENGTH);
+                            c.setX(-Car.LENGTH + (c.getX() - (getWidth() - Car.LENGTH)));
                         }
-                        stau.repaint();
+                        
                     }
+                    stau.repaint();
                     try {
-                        wait(30);
+                        if(System.currentTimeMillis() - time < 30) {
+                            wait(30 - (System.currentTimeMillis() - time));
+                        }
                     } catch(InterruptedException e) {
                         e.printStackTrace();
                     }

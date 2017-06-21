@@ -11,7 +11,7 @@ public class Car {
 	int id;
 
 	// GEOMETRISCH
-	public final static double WIDTH = 2D;
+	public final static double WIDTH = 2;
 	public final static double LENGTH = 4;
 
 	// AUTOKONTROLLE
@@ -36,7 +36,7 @@ public class Car {
 
 	public Car(Color c, int id, AIType aiType) {
 		this.c = c;
-		velocity = 1;
+		velocity = 0;
 		x = -LENGTH;
 		this.id = id;
 

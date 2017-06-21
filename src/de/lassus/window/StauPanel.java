@@ -25,8 +25,6 @@ public class StauPanel extends JPanel {
         System.out.println(rowHeight);
     }
 
-    boolean first = true;
-
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
