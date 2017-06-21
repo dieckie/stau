@@ -130,6 +130,11 @@ public class Car {
 	public void setMinAccel(double minaccel) {
 		minAccel = minaccel;
 	}
+	
+	
+    public AI getAi() {
+        return ai;
+    }
 
 	@Override
 	public String toString() {

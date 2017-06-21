@@ -12,6 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 
 import de.lassus.window.StauPanel;
+import de.lassus.engine.ais.HumanDrive;
 
 public class Engine {
 
@@ -21,7 +22,9 @@ public class Engine {
     public final static double TRACKLENGTH = 80;
     public final static int CARS = 120;
     public final static double SIMULATION_SPEED = 1;
-    
+
+    public final static double COMPUTER_RATIO = 0.3;
+
     public final static double TOTAL_LENGTH = TRACKLENGTH * ROWS + 2 * Car.LENGTH;
 
     public static Engine engine;
@@ -39,9 +42,18 @@ public class Engine {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
         double margin = Engine.TOTAL_LENGTH / (CARS);
+
+        int computerCars = (int) (CARS * COMPUTER_RATIO);
+        double carsOnComputer = CARS / computerCars;
+        int a = 0;
         for(int i = 0; i < CARS; i++) {
-            Color color = Color.getHSBColor((i * 3 % 360) / 360f, 1, 1);
-            Car c = new Car(color, i, AIType.HumanDrive);
+            //Color color = Color.getHSBColor((i * 3 % 360) / 360f, 1, 1);
+            Car c = new Car(Color.BLUE, i, AIType.HumanDrive);
+            if(Math.round(a * carsOnComputer) == i) {
+                ((HumanDrive) c.getAi()).setComputer(true);
+                c.setColor(Color.ORANGE);
+                a++;
+            }
             c.setX(-4 + margin * i);
             cars.add(c);
         }
@@ -76,7 +88,7 @@ public class Engine {
                         if(c.getX() > getWidth() - Car.LENGTH) {
                             c.setX(-Car.LENGTH + (c.getX() - (getWidth() - Car.LENGTH)));
                         }
-                        
+
                     }
                     stau.repaint();
                     try {
