@@ -24,7 +24,7 @@ public class Engine {
     public final static int CARS = 105;
     public final static double SIMULATION_SPEED = 1;
 
-    public final static double COMPUTER_RATIO = 0.0;
+    public final static double COMPUTER_RATIO = 0.4;
 
     public final static double TOTAL_LENGTH = TRACKLENGTH * ROWS + 2 * Car.LENGTH;
 
@@ -46,11 +46,11 @@ public class Engine {
 
         int computerCars = (int) (CARS * COMPUTER_RATIO);
         double carsOnComputer = computerCars == 0 ? 0 : CARS / computerCars; // Um division by zero - Error zu vermeiden, wenn keine Computerautos da sind
-        int a = 0;
+        int a = 1;
         for(int i = 0; i < CARS; i++) {
             // Color color = Color.getHSBColor((i * 3 % 360) / 360f, 1, 1);
             Car c = new Car(Color.BLUE, i, AIType.HumanDrive);
-            if(Math.round(a * carsOnComputer) == i + 1) {
+            if(Math.round(a * carsOnComputer) == i) {
                 ((HumanDrive) c.getAi()).setComputer(true);
                 c.setColor(Color.ORANGE);
                 a++;
