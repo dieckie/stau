@@ -44,7 +44,6 @@ public class StauPanel extends JPanel {
                 g2.fillRect(0, (int) ((i + 0.1) * rowHeight + ((j + 1) * (1 / (float) Engine.LANES) * 0.9) * rowHeight), getWidth(), (int) (rowHeight * 0.02));
             }
         }
-        int i = 0;
         for(Car c : engine.getCars()) {
             Color col = c.getColor();
             g.setColor(col);

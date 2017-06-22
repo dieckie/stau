@@ -1,18 +1,19 @@
 package de.lassus.engine;
 
 import java.awt.Color;
-import java.awt.KeyboardFocusManager;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.ListIterator;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
 
-import de.lassus.window.StauPanel;
 import de.lassus.engine.ais.HumanDrive;
+import de.lassus.window.StauPanel;
 
 public class Engine {
 
@@ -20,10 +21,10 @@ public class Engine {
     public final static int ROWS = 20;
     public final static int LANES = 1;
     public final static double TRACKLENGTH = 80;
-    public final static int CARS = 120;
+    public final static int CARS = 105;
     public final static double SIMULATION_SPEED = 1;
 
-    public final static double COMPUTER_RATIO = 0.05;
+    public final static double COMPUTER_RATIO = 0.0;
 
     public final static double TOTAL_LENGTH = TRACKLENGTH * ROWS + 2 * Car.LENGTH;
 
@@ -49,7 +50,7 @@ public class Engine {
         for(int i = 0; i < CARS; i++) {
             // Color color = Color.getHSBColor((i * 3 % 360) / 360f, 1, 1);
             Car c = new Car(Color.BLUE, i, AIType.HumanDrive);
-            if(Math.round(a * carsOnComputer) == i) {
+            if(Math.round(a * carsOnComputer) == i + 1) {
                 ((HumanDrive) c.getAi()).setComputer(true);
                 c.setColor(Color.ORANGE);
                 a++;
