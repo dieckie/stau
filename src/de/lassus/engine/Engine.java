@@ -21,10 +21,10 @@ public class Engine {
     public final static int ROWS = 20;
     public final static int LANES = 1;
     public final static double TRACKLENGTH = 80;
-    public final static int CARS = 201;
+    public final static int CARS = 120;
     public final static double SIMULATION_SPEED = 1;
 
-    public final static double COMPUTER_RATIO = 0.95;
+    public final static double COMPUTER_RATIO = .15;
 
     public final static double TOTAL_LENGTH = TRACKLENGTH * ROWS + 2 * Car.LENGTH;
 
@@ -36,7 +36,7 @@ public class Engine {
     public Engine() {
         engine = this;
         cars = new LinkedList<>();
-        JFrame frame = new JFrame("Stauprojekt");
+        JFrame frame = new JFrame("Stauprojekt " + CARS + " (" + COMPUTER_RATIO + ")");
         stau = new StauPanel(this);
         frame.add(stau);
         frame.pack();
