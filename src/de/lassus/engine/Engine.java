@@ -21,7 +21,7 @@ public class Engine {
     public final static int ROWS = 20;
     public final static int LANES = 1;
     public final static double TRACKLENGTH = 80;
-    public final static int CARS = 120;
+    public final static int CARS = 130;
     public final static double SIMULATION_SPEED = 1;
 
     public final static double COMPUTER_RATIO = .15;
@@ -99,8 +99,9 @@ public class Engine {
                     }
                     stau.repaint();
                     try {
-                        if(System.currentTimeMillis() - time < 30) {
-                            wait(30 - (System.currentTimeMillis() - time));
+                        long wait = 30 - (System.currentTimeMillis() - time);
+                        if(wait > 0) {
+                            wait(wait);
                         }
                     } catch(InterruptedException e) {
                         e.printStackTrace();
