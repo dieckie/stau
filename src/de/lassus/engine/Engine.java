@@ -21,10 +21,10 @@ public class Engine {
     public final static int ROWS = 20;
     public final static int LANES = 1;
     public final static double TRACKLENGTH = 80;
-    public final static int CARS = 105;
+    public final static int CARS = 201;
     public final static double SIMULATION_SPEED = 1;
 
-    public final static double COMPUTER_RATIO = 0.4;
+    public final static double COMPUTER_RATIO = 0.95;
 
     public final static double TOTAL_LENGTH = TRACKLENGTH * ROWS + 2 * Car.LENGTH;
 
@@ -45,18 +45,19 @@ public class Engine {
         double margin = Engine.TOTAL_LENGTH / (CARS);
 
         int computerCars = (int) (CARS * COMPUTER_RATIO);
-        double carsOnComputer = computerCars == 0 ? 0 : CARS / computerCars; // Um division by zero - Error zu vermeiden, wenn keine Computerautos da sind
-        int a = 1;
         for(int i = 0; i < CARS; i++) {
-            // Color color = Color.getHSBColor((i * 3 % 360) / 360f, 1, 1);
             Car c = new Car(Color.BLUE, i, AIType.HumanDrive);
-            if(Math.round(a * carsOnComputer) == i) {
-                ((HumanDrive) c.getAi()).setComputer(true);
-                c.setColor(Color.ORANGE);
-                a++;
-            }
             c.setX(-4 + margin * i);
             cars.add(c);
+        }
+        List<Car> forComputer = new LinkedList<Car>();
+        forComputer.addAll(cars);
+        for(int i = 0; i < computerCars; i++) {
+            int index = (int)(Math.random() * forComputer.size());
+            Car c = forComputer.get(index);
+            forComputer.remove(index);
+            ((HumanDrive) c.getAi()).setComputer(true);
+            c.setColor(Color.ORANGE);
         }
 
         new Thread(new Runnable() {
