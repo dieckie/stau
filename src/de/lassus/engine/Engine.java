@@ -21,10 +21,10 @@ public class Engine {
     public final static int ROWS = 20;
     public final static int LANES = 1;
     public final static double TRACKLENGTH = 80;
-    public final static int CARS = 130;
+    public final static int CARS = 160;
     public final static double SIMULATION_SPEED = 1;
 
-    public final static double COMPUTER_RATIO = .15;
+    public final static double COMPUTER_RATIO = .5;
 
     public final static double TOTAL_LENGTH = TRACKLENGTH * ROWS + 2 * Car.LENGTH;
 
@@ -68,7 +68,7 @@ public class Engine {
                 FileWriter fw = null;
                 try {
                     SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy-HH-mm-ss");
-                    fw = new FileWriter(new File(sdf.format(new Date()) + "data.csv"));
+                    fw = new FileWriter(new File(sdf.format(new Date()) + "_"+ CARS + "_" + COMPUTER_RATIO + ".csv"));
                 } catch(IOException e1) {
                     e1.printStackTrace();
                 }
